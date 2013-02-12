@@ -10,15 +10,15 @@
   [[state data]] 
   {:state state :data data})
 
-(def ^:dynamic *state* 
-  (ref (getState)))
-
 (defn getState[]
   (->> (reader "state.txt") 
        (line-seq) 
        (map parse-line) 
        (map record) 
        first))
+
+(def ^:dynamic *state* 
+  (ref (getState)))
 
 (cj/defcronj cnj
     :entries [{:id "opts"
